@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Silver Hotel — Luxury Redefined</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --red: #C0131A;
+    --red-dark: #8B0000;
+    --red-light: #E8353C;
+    --white: #FFFFFF;
+    --cream: #FFF8F8;
+    --silver: #C0C0C0;
+    --silver-light: #E8E8E8;
+    --silver-dark: #888;
+    --pink: #FFB6C1;
+    --pink-hot: #FF69B4;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+    --shadow: 0 8px 40px rgba(192,19,26,0.15);
+    --shadow-strong: 0 20px 60px rgba(192,19,26,0.25);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ===== SCREENS ===== */
+  .screen { display:none; min-height:100vh; }
+  .screen.active { display:block; }
+
+  /* ===== HERO / LANDING ===== */
+  #landing {
+    position: relative;
+    min-height: 100vh;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset:0;
+    background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.55;
+    animation: slowZoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes slowZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+  }
+
+  .hero-overlay {
+    position: absolute; inset:0;
+    background: linear-gradient(135deg, rgba(192,19,26,0.55) 0%, rgba(0,0,0,0.4) 60%, rgba(139,0,0,0.3) 100%);
+  }
+
+  .hero-content {
+    position: relative; z-index:10;
+    display: flex; flex-direction:column;
+    align-items: center; justify-content:center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items:center; gap:8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(192,192,192,0.4);
+    border-radius: 30px;
+    padding: 6px 20px;
+    color: var(--silver-light);
+    font-size: 11px; letter-spacing: 3px; text-transform:uppercase;
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 10vw, 110px);
+    font-weight: 300;
+    color: #fff;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+  }
+
+  .hero-title span {
+    color: var(--silver);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-size: 13px; letter-spacing: 6px; text-transform:uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 50px;
+  }
+
+  .hero-tagline {
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size: clamp(16px,2.5vw,22px);
+    color:rgba(255,255,255,0.85);
+    margin-bottom:60px;
+    max-width:500px;
+  }
+
+  /* Portal cards */
+  .portal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 680px;
+    width:100%;
+    margin-bottom: 40px;
+  }
+
+  .portal-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(192,192,192,0.3);
+    border-radius: 16px;
+    padding: 28px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(15px);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .portal-card::before {
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(135deg, rgba(192,19,26,0.3), transparent);
+    opacity:0; transition:0.3s;
+  }
+
+  .portal-card:hover { transform:translateY(-4px); border-color:var(--pink); }
+  .portal-card:hover::before { opacity:1; }
+
+  .portal-icon {
+    font-size: 32px; margin-bottom:10px; display:block;
+  }
+
+  .portal-label {
+    font-size: 13px; letter-spacing:2px; text-transform:uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom:4px;
+  }
+
+  .portal-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size: 24px; font-weight:400;
+    color:#fff;
+  }
+
+  .portal-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin-top:6px;
+    line-height:1.5;
+  }
+
+  /* ===== SCROLL FEATURES SECTION ===== */
+  .features-section {
+    background: var(--white);
+    padding: 80px 20px;
+  }
+
+  .section-header {
+    text-align:center; margin-bottom:60px;
+  }
+
+  .section-eyebrow {
+    font-size:11px; letter-spacing:4px; text-transform:uppercase;
+    color:var(--red); margin-bottom:12px;
+  }
+
+  .section-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size: clamp(36px,5vw,58px);
+    font-weight:300; color:var(--text-dark);
+    line-height:1.1;
+  }
+
+  .features-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    gap:32px;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .feature-card {
+    border-radius: 20px;
+    overflow:hidden;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor:pointer;
+  }
+
+  .feature-card:hover {
+    transform:translateY(-6px);
+    box-shadow: var(--shadow-strong);
+  }
+
+  .feature-img {
+    width:100%; height:220px; object-fit:cover;
+    background: #ddd;
+  }
+
+  .feature-body {
+    background:#fff;
+    padding: 24px;
+    border-top: 3px solid var(--red);
+  }
+
+  .feature-icon { font-size:24px; margin-bottom:8px; }
+
+  .feature-name {
+    font-family:'Cormorant Garamond',serif;
+    font-size:22px; font-weight:600;
+    color:var(--text-dark); margin-bottom:6px;
+  }
+
+  .feature-text {
+    font-size:13px; color:var(--text-mid); line-height:1.6;
+  }
+
+  /* ===== ROOM GALLERY ===== */
+  .gallery-section {
+    background: #0d0d0d;
+    padding: 80px 20px;
+  }
+
+  .gallery-section .section-title { color:#fff; }
+  .gallery-section .section-eyebrow { color:var(--silver); }
+
+  .gallery-grid {
+    display:grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 260px 260px;
+    gap:12px;
+    max-width:1100px; margin:0 auto;
+  }
+
+  .gallery-item {
+    border-radius:12px; overflow:hidden;
+    position:relative;
+  }
+
+  .gallery-item:first-child {
+    grid-row: 1 / 3;
+  }
+
+  .gallery-img {
+    width:100%; height:100%; object-fit:cover;
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-item:hover .gallery-img { transform:scale(1.05); }
+
+  .gallery-label {
+    position:absolute; bottom:12px; left:12px;
+    background:rgba(0,0,0,0.6);
+    color:#fff; font-size:11px; letter-spacing:2px;
+    text-transform:uppercase; padding:4px 12px;
+    border-radius:20px; backdrop-filter:blur(5px);
+  }
+
+  /* ===== AUTH MODAL ===== */
+  .modal-overlay {
+    display:none;
+    position:fixed; inset:0;
+    background:rgba(0,0,0,0.75);
+    z-index:1000;
+    align-items:center; justify-content:center;
+    backdrop-filter: blur(6px);
+  }
+  .modal-overlay.open { display:flex; }
+
+  .modal-box {
+    background:#fff;
+    border-radius:24px;
+    width:100%; max-width:460px;
+    padding:48px 40px;
+    position:relative;
+    animation: modalIn 0.3s ease;
+    max-height:90vh; overflow-y:auto;
+  }
+
+  @keyframes modalIn {
+    from { transform:translateY(30px); opacity:0; }
+    to { transform:translateY(0); opacity:1; }
+  }
+
+  .modal-close {
+    position:absolute; top:16px; right:20px;
+    background:none; border:none;
+    font-size:24px; cursor:pointer; color:#aaa;
+  }
+  .modal-close:hover { color:var(--red); }
+
+  .modal-portal-badge {
+    display:inline-block;
+    background:var(--red);
+    color:#fff;
+    font-size:10px; letter-spacing:2px; text-transform:uppercase;
+    padding:4px 14px; border-radius:20px;
+    margin-bottom:16px;
+  }
+
+  .modal-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:36px; font-weight:400;
+    color:var(--text-dark);
+    margin-bottom:8px;
+  }
+
+  .modal-sub {
+    font-size:13px; color:var(--silver-dark);
+    margin-bottom:32px;
+  }
+
+  .tabs {
+    display:flex; gap:0;
+    background:var(--silver-light);
+    border-radius:10px; padding:4px;
+    margin-bottom:28px;
+  }
+
+  .tab-btn {
+    flex:1; padding:10px;
+    background:transparent; border:none;
+    border-radius:8px; cursor:pointer;
+    font-family:'Montserrat',sans-serif;
+    font-size:13px; font-weight:500;
+    color:var(--text-mid);
+    transition:0.2s;
+  }
+  .tab-btn.active {
+    background:#fff;
+    color:var(--red);
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .form-group { margin-bottom:18px; }
+
+  .form-label {
+    display:block;
+    font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--silver-dark); margin-bottom:6px;
+  }
+
+  .form-input {
+    width:100%; padding:13px 16px;
+    border:1.5px solid var(--silver-light);
+    border-radius:10px;
+    font-family:'Montserrat',sans-serif;
+    font-size:14px; color:var(--text-dark);
+    background:var(--cream);
+    transition:0.2s;
+    outline:none;
+  }
+  .form-input:focus { border-color:var(--red); background:#fff; }
+
+  /* Auth helpers */
+  .input-row { position:relative; }
+  .input-action {
+    position:absolute; right:10px; top:50%; transform:translateY(-50%);
+    border:1px solid var(--silver-light);
+    background:#fff;
+    color:var(--text-mid);
+    border-radius:10px;
+    padding:6px 10px;
+    cursor:pointer;
+    font-size:12px;
+  }
+  .input-action:hover { border-color:var(--red); color:var(--red); }
+  .form-error {
+    margin-top:8px;
+    font-size:12px;
+    color:#c62828;
+    display:none;
+    line-height:1.4;
+  }
+  .form-error.show { display:block; }
+  .field-error { border-color:#c62828 !important; background:#fff; }
+  .field-ok { border-color:#2e7d32 !important; background:#fff; }
+  .auth-row {
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; margin-top:6px; flex-wrap:wrap;
+  }
+  .check {
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; color:var(--text-mid);
+    user-select:none;
+  }
+  .check input { width:16px; height:16px; accent-color: var(--red); }
+  .link-btn {
+    background:none; border:none; padding:0;
+    color:var(--red); cursor:pointer;
+    font-size:12px; font-weight:600;
+  }
+  .link-btn:hover { text-decoration:underline; }
+  .btn-primary[disabled] { opacity:0.7; cursor:not-allowed; transform:none; box-shadow:none; }
+  .btn-primary .spinner {
+    display:none;
+    width:14px; height:14px;
+    border:2px solid rgba(255,255,255,0.45);
+    border-top-color:#fff;
+    border-radius:50%;
+    animation: spin 0.8s linear infinite;
+  }
+  .btn-primary.loading .spinner { display:inline-block; }
+  .btn-primary.loading .btn-text { opacity:0.9; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .btn-primary {
+    width:100%; padding:15px;
+    background: linear-gradient(135deg, var(--red), var(--red-dark));
+    color:#fff; border:none;
+    border-radius:12px; cursor:pointer;
+    font-family:'Montserrat',sans-serif;
+    font-size:14px; font-weight:600; letter-spacing:1px;
+    transition:all 0.3s;
+    margin-top:8px;
+  }
+  .btn-primary:hover {
+    background:linear-gradient(135deg,var(--red-light),var(--red));
+    box-shadow:0 8px 25px rgba(192,19,26,0.35);
+    transform:translateY(-1px);
+  }
+
+  .btn-pink {
+    background: linear-gradient(135deg, var(--pink-hot), #ff8fa3);
+    color:#fff; border:none;
+    padding:12px 28px; border-radius:10px;
+    cursor:pointer;
+    font-family:'Montserrat',sans-serif;
+    font-size:13px; font-weight:600;
+    transition:all 0.3s;
+  }
+  .btn-pink:hover {
+    transform:translateY(-2px);
+    box-shadow:0 6px 20px rgba(255,105,180,0.4);
+  }
+
+  .btn-outline {
+    width:100%; padding:13px;
+    background:transparent;
+    border:1.5px solid var(--silver-light);
+    border-radius:12px; cursor:pointer;
+    font-family:'Montserrat',sans-serif;
+    font-size:13px; color:var(--text-mid);
+    transition:0.2s; margin-top:10px;
+  }
+  .btn-outline:hover { border-color:var(--red); color:var(--red); }
+
+  /* ===== DASHBOARD SCREENS ===== */
+  .dashboard { min-height:100vh; background:var(--cream); }
+
+  .top-nav {
+    background:#fff;
+    border-bottom:1px solid var(--silver-light);
+    padding:0 32px;
+    height:65px;
+    display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:100;
+    box-shadow:0 2px 15px rgba(0,0,0,0.05);
+  }
+
+  .nav-brand {
+    font-family:'Cormorant Garamond',serif;
+    font-size:26px; font-weight:400;
+    color:var(--red);
+    display:flex; align-items:center; gap:8px;
+  }
+
+  .nav-brand span { color:var(--silver-dark); font-size:14px; font-weight:300; }
+
+  .nav-right { display:flex; align-items:center; gap:16px; }
+
+  .nav-user {
+    display:flex; align-items:center; gap:10px;
+    font-size:13px; color:var(--text-mid);
+  }
+
+  .nav-avatar {
+    width:36px; height:36px; border-radius:50%;
+    background:linear-gradient(135deg,var(--red),var(--red-dark));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:14px; font-weight:600;
+  }
+
+  .btn-logout {
+    background:none; border:1.5px solid var(--silver-light);
+    border-radius:8px; padding:7px 16px;
+    font-size:12px; cursor:pointer; color:var(--text-mid);
+    font-family:'Montserrat',sans-serif;
+    transition:0.2s;
+  }
+  .btn-logout:hover { border-color:var(--red); color:var(--red); }
+
+  .dash-body {
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    min-height:calc(100vh - 65px);
+  }
+
+  .sidebar {
+    background:#fff;
+    border-right:1px solid var(--silver-light);
+    padding:28px 0;
+  }
+
+  .sidebar-section {
+    margin-bottom:8px;
+  }
+
+  .sidebar-label {
+    font-size:10px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--silver-dark); padding:0 20px 8px;
+  }
+
+  .sidebar-item {
+    display:flex; align-items:center; gap:12px;
+    padding:11px 20px;
+    cursor:pointer;
+    font-size:13px; color:var(--text-mid);
+    transition:0.2s;
+    border-left:3px solid transparent;
+  }
+
+  .sidebar-item:hover { background:var(--cream); color:var(--red); }
+  .sidebar-item.active {
+    background: linear-gradient(90deg, rgba(192,19,26,0.08), transparent);
+    color:var(--red);
+    border-left-color:var(--red);
+    font-weight:500;
+  }
+
+  .sidebar-item .si-icon { font-size:16px; width:20px; text-align:center; }
+
+  .main-content {
+    padding:36px;
+    overflow-y:auto;
+  }
+
+  .page-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:38px; font-weight:400;
+    color:var(--text-dark); margin-bottom:6px;
+  }
+
+  .page-subtitle { font-size:13px; color:var(--silver-dark); margin-bottom:36px; }
+
+  /* Stat cards */
+  .stat-row {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:20px; margin-bottom:36px;
+  }
+
+  .stat-card {
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.06);
+    border-top:3px solid var(--red);
+  }
+
+  .stat-icon { font-size:28px; margin-bottom:10px; }
+  .stat-value {
+    font-family:'Cormorant Garamond',serif;
+    font-size:36px; font-weight:400;
+    color:var(--text-dark);
+  }
+  .stat-label { font-size:12px; color:var(--silver-dark); margin-top:4px; }
+
+  /* Content panels */
+  .panel {
+    background:#fff;
+    border-radius:16px;
+    padding:28px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.06);
+    margin-bottom:24px;
+  }
+
+  .panel-header {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:20px;
+    padding-bottom:16px;
+    border-bottom:1px solid var(--silver-light);
+  }
+
+  .panel-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:22px; font-weight:400;
+  }
+
+  /* Table */
+  .data-table { width:100%; border-collapse:collapse; }
+  .data-table th {
+    text-align:left; font-size:10px; letter-spacing:2px;
+    text-transform:uppercase; color:var(--silver-dark);
+    padding:10px 16px; border-bottom:2px solid var(--silver-light);
+    font-weight:600;
+  }
+  .data-table td {
+    padding:14px 16px; font-size:13px;
+    border-bottom:1px solid var(--silver-light);
+    color:var(--text-mid);
+  }
+  .data-table tr:hover td { background:var(--cream); }
+
+  .badge {
+    display:inline-block; padding:3px 10px;
+    border-radius:20px; font-size:11px; font-weight:500;
+  }
+  .badge-green { background:#e8f5e9; color:#2e7d32; }
+  .badge-red { background:#ffebee; color:#c62828; }
+  .badge-yellow { background:#fff8e1; color:#f57f17; }
+  .badge-blue { background:#e3f2fd; color:#1565c0; }
+  .badge-pink { background:#fce4ec; color:#c2185b; }
+
+  /* Room cards for client */
+  .room-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+    gap:24px;
+    margin-bottom:24px;
+  }
+
+  .room-card {
+    background:#fff;
+    border-radius:16px; overflow:hidden;
+    box-shadow:0 2px 15px rgba(0,0,0,0.06);
+    transition:0.3s;
+  }
+  .room-card:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
+
+  .room-img { width:100%; height:180px; object-fit:cover; }
+
+  .room-body { padding:20px; }
+
+  .room-name {
+    font-family:'Cormorant Garamond',serif;
+    font-size:22px; font-weight:400;
+    margin-bottom:4px;
+  }
+
+  .room-price {
+    font-size:13px; color:var(--red); font-weight:600;
+    margin-bottom:10px;
+  }
+
+  .room-amenities { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+
+  .amenity-tag {
+    font-size:10px; letter-spacing:1px;
+    background:var(--cream); color:var(--text-mid);
+    padding:3px 8px; border-radius:4px;
+  }
+
+  /* Delivery section */
+  .delivery-banner {
+    background:linear-gradient(135deg, var(--red), var(--red-dark));
+    border-radius:20px; padding:32px;
+    color:#fff; margin-bottom:24px;
+    display:flex; align-items:center; gap:24px;
+    flex-wrap:wrap;
+  }
+
+  .delivery-banner-icon { font-size:56px; }
+
+  .delivery-banner h3 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:30px; margin-bottom:6px;
+  }
+
+  .delivery-banner p { font-size:13px; opacity:0.85; margin-bottom:14px; }
+
+  .delivery-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:16px; margin-bottom:24px;
+  }
+
+  .delivery-card {
+    background:#fff;
+    border-radius:16px; overflow:hidden;
+    box-shadow:0 2px 15px rgba(0,0,0,0.06);
+    cursor:pointer;
+    transition:0.3s;
+    border:2px solid transparent;
+  }
+  .delivery-card:hover { border-color:var(--pink-hot); transform:translateY(-3px); }
+
+  .delivery-card-img { width:100%; height:130px; object-fit:cover; }
+
+  .delivery-card-body { padding:14px; }
+
+  .delivery-card-name { font-size:14px; font-weight:600; margin-bottom:4px; }
+  .delivery-card-price { font-size:13px; color:var(--red); font-weight:600; }
+
+  /* Delivery tracking */
+  .progress {
+    height:10px;
+    background:var(--silver-light);
+    border-radius:999px;
+    overflow:hidden;
+  }
+  .progress > div {
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg, var(--pink-hot), var(--red));
+    transition:width 0.35s ease;
+  }
+  .pill {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:6px 12px;
+    border-radius:999px;
+    background:var(--cream);
+    border:1px solid var(--silver-light);
+    font-size:12px;
+    color:var(--text-mid);
+    cursor:pointer;
+  }
+  .pill:hover { border-color:var(--red); color:var(--red); }
+  .small { font-size:12px; color:var(--silver-dark); line-height:1.5; }
+
+  /* Notification */
+  .notif-badge {
+    background:var(--red); color:#fff;
+    border-radius:50%; width:18px; height:18px;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:10px; font-weight:700; margin-left:4px;
+  }
+
+  /* ===== FOOTER on landing ===== */
+  .hero-scroll-hint {
+    position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+    color:rgba(255,255,255,0.5); font-size:11px; letter-spacing:2px;
+    text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:6px;
+    z-index:10;
+    animation:bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100%{transform:translateX(-50%) translateY(0);}
+    50%{transform:translateX(-50%) translateY(-8px);}
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:768px){
+    .portal-grid { grid-template-columns:1fr 1fr; }
+    .gallery-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+    .gallery-item:first-child { grid-row:auto; }
+    .dash-body { grid-template-columns:1fr; }
+    .sidebar { display:none; }
+    .main-content { padding:20px; }
+    .modal-box { padding:32px 24px; }
+    .top-nav { padding:0 16px; }
+    .delivery-banner { flex-direction:column; }
+  }
+  @media(max-width:480px){
+    .portal-grid { grid-template-columns:1fr; }
+    .stat-row { grid-template-columns:1fr 1fr; }
+  }
+
+  /* Sub-page hidden */
+  .sub-page { display:none; }
+  .sub-page.active { display:block; }
+
+  /* Loading shimmer */
+  .shimmer {
+    background:linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size:200% 100%;
+    animation:shimmer 1.5s infinite;
+    border-radius:8px;
+  }
+  @keyframes shimmer{from{background-position:200% 0;}to{background-position:-200% 0;}}
+
+  /* ===== BOOKING FORM ===== */
+  .booking-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+  /* ===== HORIZONTAL SCROLL for rooms ===== */
+  .hscroll { display:flex; gap:20px; overflow-x:auto; padding-bottom:12px; }
+  .hscroll::-webkit-scrollbar { height:4px; }
+  .hscroll::-webkit-scrollbar-thumb { background:var(--silver); border-radius:2px; }
+  .hscroll .room-card { min-width:260px; flex-shrink:0; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SCREEN 1: LANDING / PORTAL SELECTION
+============================================================ -->
+<div id="landing" class="screen active">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">✦ Established 1985 · Kigali, Rwanda</div>
+    <h1 class="hero-title">Silver<br/><span>Hotel</span></h1>
+    <p class="hero-subtitle">Luxury · Comfort · Excellence</p>
+    <p class="hero-tagline">"Where every stay becomes a timeless memory"</p>
+
+    <div class="portal-grid">
+      <div class="portal-card" onclick="openPortal('client')">
+        <span class="portal-icon">🛎️</span>
+        <div class="portal-label">Welcome</div>
+        <div class="portal-title">Client</div>
+        <div class="portal-desc">Book rooms, order food, request services</div>
+      </div>
+      <div class="portal-card" onclick="openPortal('manager')">
+        <span class="portal-icon">📊</span>
+        <div class="portal-label">Operations</div>
+        <div class="portal-title">Manager</div>
+        <div class="portal-desc">Reservations, reports, staff oversight</div>
+      </div>
+      <div class="portal-card" onclick="openPortal('boss')">
+        <span class="portal-icon">👑</span>
+        <div class="portal-label">Executive</div>
+        <div class="portal-title">Boss</div>
+        <div class="portal-desc">Analytics, financials, strategic control</div>
+      </div>
+      <div class="portal-card" onclick="openPortal('employee')">
+        <span class="portal-icon">🏷️</span>
+        <div class="portal-label">Staff</div>
+        <div class="portal-title">Employees</div>
+        <div class="portal-desc">Tasks, attendance, payroll, schedule</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>▼</span>
+    <span>Explore Our Hotel</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FEATURES + GALLERY (below hero, same page scroll)
+     Actually we'll keep it as separate section but shown on landing
+============================================================ -->
+
+<!-- ============================================================
+     AUTH MODAL
+============================================================ -->
+<div id="authModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalPortalBadge" class="modal-portal-badge">Client Portal</div>
+    <h2 class="modal-title" id="modalTitle">Welcome Back</h2>
+    <p class="modal-sub" id="modalSub">Sign in to access your portal</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="loginTab" onclick="switchTab('login')">Sign In</button>
+      <button class="tab-btn" id="signupTab" onclick="switchTab('signup')">Create Account</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <div class="input-row">
+          <input class="form-input" type="email" placeholder="Enter your email" id="loginEmail" autocomplete="email" required/>
+        </div>
+        <div class="form-error" id="loginEmailError">Please enter a valid email address.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <div class="input-row">
+          <input class="form-input" type="password" placeholder="••••••••" id="loginPass" autocomplete="current-password" required/>
+          <button class="input-action" type="button" onclick="togglePassword()" id="togglePassBtn">Show</button>
+        </div>
+        <div class="form-error" id="loginPassError">Password is required.</div>
+      </div>
+      <div class="auth-row">
+        <label class="check"><input type="checkbox" id="rememberMe"/> Remember me</label>
+        <button class="link-btn" type="button" onclick="forgotPassword()">Forgot password?</button>
+      </div>
+      <div class="form-error" id="loginFormError">Incorrect email or password.</div>
+
+      <button class="btn-primary" id="loginBtn" onclick="doLogin()">
+        <span class="spinner" aria-hidden="true"></span>
+        <span class="btn-text">Sign In →</span>
+      </button>
+      <button class="btn-outline" onclick="switchTab('signup')">Don't have an account? Create Account</button>
+    </div>
+
+    <!-- SIGNUP FORM -->
+    <div id="signupForm" style="display:none;">
+      <div class="booking-form-grid">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input class="form-input" type="text" placeholder="Jean"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input class="form-input" type="text" placeholder="Mutabazi"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" placeholder="you@example.com"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone Number</label>
+        <input class="form-input" type="tel" placeholder="+250 78 000 0000"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" placeholder="Min. 8 characters"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm Password</label>
+        <input class="form-input" type="password" placeholder="Repeat password"/>
+      </div>
+      <button class="btn-primary" onclick="doLogin()">Create Account →</button>
+      <button class="btn-outline" onclick="switchTab('login')">Already have an account? Sign In</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CLIENT DASHBOARD
+============================================================ -->
+<div id="clientDash" class="screen dashboard">
+  <nav class="top-nav">
+    <div class="nav-brand">🏨 Silver Hotel <span>/ Guest Portal</span></div>
+    <div class="nav-right">
+      <div class="nav-user">
+        <div class="nav-avatar">G</div>
+        <span>Guest</span>
+      </div>
+      <button class="btn-logout" onclick="logout()">← Log Out</button>
+    </div>
+  </nav>
+  <div class="dash-body">
+    <nav class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Main</div>
+        <div class="sidebar-item active" onclick="showClientPage('overview')"><span class="si-icon">🏠</span> Overview</div>
+        <div class="sidebar-item" onclick="showClientPage('rooms')"><span class="si-icon">🛏️</span> Book a Room</div>
+        <div class="sidebar-item" onclick="showClientPage('delivery')"><span class="si-icon">🍽️</span> Room Delivery <span class="notif-badge">3</span></div>
+        <div class="sidebar-item" onclick="showClientPage('spa')"><span class="si-icon">💆</span> Spa & Wellness</div>
+        <div class="sidebar-item" onclick="showClientPage('transport')"><span class="si-icon">🚗</span> Transport</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">My Account</div>
+        <div class="sidebar-item" onclick="showClientPage('bookings')"><span class="si-icon">📋</span> My Bookings</div>
+        <div class="sidebar-item" onclick="showClientPage('invoice')"><span class="si-icon">💳</span> Invoices</div>
+        <div class="sidebar-item" onclick="showClientPage('profile')"><span class="si-icon">👤</span> Profile</div>
+      </div>
+    </nav>
+    <main class="main-content" id="clientMain">
+      <!-- Overview page default -->
+    </main>
+  </div>
+</div>
+
+<!-- ============================================================
+     MANAGER DASHBOARD
+============================================================ -->
+<div id="managerDash" class="screen dashboard">
+  <nav class="top-nav">
+    <div class="nav-brand">🏨 Silver Hotel <span>/ Manager Portal</span></div>
+    <div class="nav-right">
+      <div class="nav-user">
+        <div class="nav-avatar">M</div>
+        <span>Manager</span>
+      </div>
+      <button class="btn-logout" onclick="logout()">← Log Out</button>
+    </div>
+  </nav>
+  <div class="dash-body">
+    <nav class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Operations</div>
+        <div class="sidebar-item active" onclick="showManagerPage('overview')"><span class="si-icon">📊</span> Dashboard</div>
+        <div class="sidebar-item" onclick="showManagerPage('reservations')"><span class="si-icon">📅</span> Reservations</div>
+        <div class="sidebar-item" onclick="showManagerPage('rooms')"><span class="si-icon">🛏️</span> Room Status</div>
+        <div class="sidebar-item" onclick="showManagerPage('complaints')"><span class="si-icon">📨</span> Guest Requests <span class="notif-badge">5</span></div>
+        <div class="sidebar-item" onclick="showManagerPage('inventory')"><span class="si-icon">📦</span> Inventory</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Staff</div>
+        <div class="sidebar-item" onclick="showManagerPage('staff')"><span class="si-icon">👥</span> Staff List</div>
+        <div class="sidebar-item" onclick="showManagerPage('schedule')"><span class="si-icon">🗓️</span> Schedule</div>
+        <div class="sidebar-item" onclick="showManagerPage('reports')"><span class="si-icon">📈</span> Reports</div>
+      </div>
+    </nav>
+    <main class="main-content" id="managerMain"></main>
+  </div>
+</div>
+
+<!-- ============================================================
+     BOSS DASHBOARD
+============================================================ -->
+<div id="bossDash" class="screen dashboard">
+  <nav class="top-nav">
+    <div class="nav-brand">🏨 Silver Hotel <span>/ Executive Portal</span></div>
+    <div class="nav-right">
+      <div class="nav-user">
+        <div class="nav-avatar" style="background:linear-gradient(135deg,#B8860B,#DAA520)">👑</div>
+        <span>Executive</span>
+      </div>
+      <button class="btn-logout" onclick="logout()">← Log Out</button>
+    </div>
+  </nav>
+  <div class="dash-body">
+    <nav class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Executive</div>
+        <div class="sidebar-item active" onclick="showBossPage('overview')"><span class="si-icon">📊</span> Analytics</div>
+        <div class="sidebar-item" onclick="showBossPage('revenue')"><span class="si-icon">💰</span> Revenue</div>
+        <div class="sidebar-item" onclick="showBossPage('departments')"><span class="si-icon">🏢</span> Departments</div>
+        <div class="sidebar-item" onclick="showBossPage('managers')"><span class="si-icon">🎯</span> Managers</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Strategic</div>
+        <div class="sidebar-item" onclick="showBossPage('audit')"><span class="si-icon">🔍</span> Audit Logs</div>
+        <div class="sidebar-item" onclick="showBossPage('policy')"><span class="si-icon">📜</span> Policies</div>
+        <div class="sidebar-item" onclick="showBossPage('settings')"><span class="si-icon">⚙️</span> Settings</div>
+      </div>
+    </nav>
+    <main class="main-content" id="bossMain"></main>
+  </div>
+</div>
+
+<!-- ============================================================
+     EMPLOYEE DASHBOARD
+============================================================ -->
+<div id="employeeDash" class="screen dashboard">
+  <nav class="top-nav">
+    <div class="nav-brand">🏨 Silver Hotel <span>/ Staff Portal</span></div>
+    <div class="nav-right">
+      <div class="nav-user">
+        <div class="nav-avatar" style="background:linear-gradient(135deg,#1565c0,#1976d2)">E</div>
+        <span>Staff</span>
+      </div>
+      <button class="btn-logout" onclick="logout()">← Log Out</button>
+    </div>
+  </nav>
+  <div class="dash-body">
+    <nav class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">My Work</div>
+        <div class="sidebar-item active" onclick="showEmployeePage('overview')"><span class="si-icon">🏠</span> My Dashboard</div>
+        <div class="sidebar-item" onclick="showEmployeePage('tasks')"><span class="si-icon">✅</span> My Tasks <span class="notif-badge">4</span></div>
+        <div class="sidebar-item" onclick="showEmployeePage('schedule')"><span class="si-icon">🗓️</span> My Schedule</div>
+        <div class="sidebar-item" onclick="showEmployeePage('attendance')"><span class="si-icon">🕐</span> Attendance</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">HR</div>
+        <div class="sidebar-item" onclick="showEmployeePage('payroll')"><span class="si-icon">💵</span> Payroll</div>
+        <div class="sidebar-item" onclick="showEmployeePage('leave')"><span class="si-icon">🌴</span> Leave Request</div>
+        <div class="sidebar-item" onclick="showEmployeePage('profile')"><span class="si-icon">👤</span> My Profile</div>
+      </div>
+    </nav>
+    <main class="main-content" id="employeeMain"></main>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+let currentPortal = 'client';
+
+const PORTALS = {
+  client:   { label:'Client Portal',   title:'Welcome Back',         sub:'Sign in to access your guest services' },
+  manager:  { label:'Manager Portal',  title:'Manager Access',       sub:'Operations & Staff Management' },
+  boss:     { label:'Executive Portal',title:'Executive Access',     sub:'Strategic & Financial Oversight' },
+  employee: { label:'Employee Portal', title:'Staff Sign In',        sub:'Access your work dashboard' }
+};
+
+// ============================================================
+// LANDING & AUTH
+// ============================================================
+function openPortal(portal){
+  currentPortal = portal;
+  const p = PORTALS[portal];
+  document.getElementById('modalPortalBadge').textContent = p.label;
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalSub').textContent = p.sub;
+  document.getElementById('authModal').classList.add('open');
+  switchTab('login');
+}
+
+function closeModal(){
+  document.getElementById('authModal').classList.remove('open');
+}
+
+function switchTab(tab){
+  document.getElementById('loginForm').style.display = tab==='login'?'block':'none';
+  document.getElementById('signupForm').style.display = tab==='signup'?'block':'none';
+  document.getElementById('loginTab').className = 'tab-btn' + (tab==='login'?' active':'');
+  document.getElementById('signupTab').className = 'tab-btn' + (tab==='signup'?' active':'');
+  // Clear inline errors when switching tabs
+  if(tab==='login'){
+    clearLoginErrors();
+    const remembered = localStorage.getItem('remember_email') || '';
+    const emailEl = document.getElementById('loginEmail');
+    if(emailEl && remembered) emailEl.value = remembered;
+    const rememberEl = document.getElementById('rememberMe');
+    if(rememberEl) rememberEl.checked = !!remembered;
+  }
+}
+
+function validateEmail(email){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email||'').trim());
+}
+
+function setFieldState(inputEl, errorEl, ok){
+  if(!inputEl || !errorEl) return;
+  inputEl.classList.remove('field-error','field-ok');
+  errorEl.classList.remove('show');
+  if(ok === true){
+    inputEl.classList.add('field-ok');
+  } else if(ok === false){
+    inputEl.classList.add('field-error');
+    errorEl.classList.add('show');
+  }
+}
+
+function clearLoginErrors(){
+  const emailEl = document.getElementById('loginEmail');
+  const passEl = document.getElementById('loginPass');
+  const emailErr = document.getElementById('loginEmailError');
+  const passErr = document.getElementById('loginPassError');
+  const formErr = document.getElementById('loginFormError');
+  if(emailEl) emailEl.classList.remove('field-error','field-ok');
+  if(passEl) passEl.classList.remove('field-error','field-ok');
+  if(emailErr) emailErr.classList.remove('show');
+  if(passErr) passErr.classList.remove('show');
+  if(formErr) formErr.classList.remove('show');
+}
+
+function togglePassword(){
+  const passEl = document.getElementById('loginPass');
+  const btn = document.getElementById('togglePassBtn');
+  if(!passEl || !btn) return;
+  const isHidden = passEl.type === 'password';
+  passEl.type = isHidden ? 'text' : 'password';
+  btn.textContent = isHidden ? 'Hide' : 'Show';
+}
+
+function forgotPassword(){
+  alert("Forgot password demo: in a real app, we'd send a reset link to your email.");
+}
+
+function setLoginLoading(isLoading){
+  const btn = document.getElementById('loginBtn');
+  const emailEl = document.getElementById('loginEmail');
+  const passEl = document.getElementById('loginPass');
+  if(btn){
+    btn.disabled = !!isLoading;
+    btn.classList.toggle('loading', !!isLoading);
+  }
+  if(emailEl) emailEl.disabled = !!isLoading;
+  if(passEl) passEl.disabled = !!isLoading;
+}
+
+function doLogin(){
+  clearLoginErrors();
+  const emailEl = document.getElementById('loginEmail');
+  const passEl = document.getElementById('loginPass');
+  const email = emailEl ? emailEl.value : '';
+  const pass = passEl ? passEl.value : '';
+  const emailErr = document.getElementById('loginEmailError');
+  const passErr = document.getElementById('loginPassError');
+  const formErr = document.getElementById('loginFormError');
+
+  const emailOk = validateEmail(email);
+  const passOk = String(pass||'').length > 0;
+  setFieldState(emailEl, emailErr, emailOk);
+  setFieldState(passEl, passErr, passOk);
+  if(!emailOk || !passOk) return;
+
+  // Remember me
+  const remember = document.getElementById('rememberMe');
+  if(remember && remember.checked) localStorage.setItem('remember_email', String(email).trim());
+  else localStorage.removeItem('remember_email');
+
+  // Loading state (simulated auth)
+  setLoginLoading(true);
+  if(formErr) formErr.classList.remove('show');
+
+  setTimeout(()=>{
+    setLoginLoading(false);
+    // Demo: reject a specific password to show error feedback
+    if(String(pass).toLowerCase() === 'wrong'){
+      if(formErr) formErr.classList.add('show');
+      setFieldState(passEl, passErr, false);
+      return;
+    }
+    closeModal();
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    const map = { client:'clientDash', manager:'managerDash', boss:'bossDash', employee:'employeeDash' };
+    document.getElementById(map[currentPortal]).classList.add('active');
+    // Load default page
+    if(currentPortal==='client') showClientPage('overview');
+    if(currentPortal==='manager') showManagerPage('overview');
+    if(currentPortal==='boss') showBossPage('overview');
+    if(currentPortal==='employee') showEmployeePage('overview');
+  }, 700);
+}
+
+// Inline validation while typing (login)
+document.addEventListener('input', function(e){
+  if(e.target && e.target.id === 'loginEmail'){
+    const emailEl = e.target;
+    const emailErr = document.getElementById('loginEmailError');
+    if(!emailEl.value) return setFieldState(emailEl, emailErr, null);
+    setFieldState(emailEl, emailErr, validateEmail(emailEl.value));
+  }
+  if(e.target && e.target.id === 'loginPass'){
+    const passEl = e.target;
+    const passErr = document.getElementById('loginPassError');
+    if(!passEl.value) return setFieldState(passEl, passErr, null);
+    setFieldState(passEl, passErr, true);
+  }
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Enter'){
+    const modalOpen = document.getElementById('authModal')?.classList.contains('open');
+    const loginVisible = document.getElementById('loginForm')?.style.display !== 'none';
+    if(modalOpen && loginVisible){
+      e.preventDefault();
+      doLogin();
+    }
+  }
+});
+
+function logout(){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('landing').classList.add('active');
+}
+
+// Close modal on overlay click
+document.getElementById('authModal').addEventListener('click', function(e){
+  if(e.target===this) closeModal();
+});
+
+// ============================================================
+// CLIENT PAGES
+// ============================================================
+function showClientPage(page){
+  // Update sidebar active
+  document.querySelectorAll('#clientDash .sidebar-item').forEach(i=>{
+    i.classList.remove('active');
+    if(i.getAttribute('onclick')&&i.getAttribute('onclick').includes(`'${page}'`)) i.classList.add('active');
+  });
+  const el = document.getElementById('clientMain');
+
+  if(page==='overview'){
+    el.innerHTML = `
+      <div class="page-title">Good morning, Guest 🌟</div>
+      <p class="page-subtitle">Welcome to Silver Hotel — your luxury home away from home</p>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-icon">🛏️</div>
+          <div class="stat-value">204</div>
+          <div class="stat-label">Your Room Number</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📅</div>
+          <div class="stat-value">3</div>
+          <div class="stat-label">Nights Remaining</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-value">Gold</div>
+          <div class="stat-label">Loyalty Tier</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🍽️</div>
+          <div class="stat-value">2</div>
+          <div class="stat-label">Orders Today</div>
+        </div>
+      </div>
+
+      <!-- Delivery Banner -->
+      <div class="delivery-banner">
+        <div class="delivery-banner-icon">🚀</div>
+        <div style="flex:1">
+          <h3>Room Delivery — 24/7 Service</h3>
+          <p>Order food, beverages, toiletries, and amenities delivered straight to your door in under 20 minutes.</p>
+          <button class="btn-pink" onclick="showClientPage('delivery')">Order Now →</button>
+        </div>
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&h=140&fit=crop" style="border-radius:12px;width:150px;height:100px;object-fit:cover;opacity:0.85"/>
+      </div>
+
+      <!-- Room image slider -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Explore Our Spaces</div>
+          <button class="btn-pink" onclick="showClientPage('rooms')">Book a Room</button>
+        </div>
+        <div class="hscroll">
+          ${[
+            ['https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&q=80','Deluxe Suite','$280/night'],
+            ['https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400&q=80','Presidential Suite','$650/night'],
+            ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&q=80','Standard Room','$150/night'],
+            ['https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80','Garden View','$190/night'],
+          ].map(([img,name,price])=>`
+            <div class="room-card">
+              <img class="room-img" src="${img}" alt="${name}" onerror="this.style.background='#f0f0f0'"/>
+              <div class="room-body">
+                <div class="room-name">${name}</div>
+                <div class="room-price">${price}</div>
+                <div class="room-amenities">
+                  <span class="amenity-tag">🛁 Bathtub</span>
+                  <span class="amenity-tag">📶 WiFi</span>
+                  <span class="amenity-tag">🍳 Breakfast</span>
+                </div>
+                <button class="btn-pink" style="width:100%;padding:10px">Book Now</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- Quick services -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px">
+        ${[
+          ['🧹','Housekeeping','Request now'],
+          ['🚗','Airport Taxi','Book ride'],
+          ['💆','Spa','Schedule'],
+          ['🏊','Pool','Reserve'],
+          ['🍷','Minibar','Restock'],
+          ['📞','Concierge','Call'],
+        ].map(([icon,name,action])=>`
+          <div class="panel" style="text-align:center;padding:20px;cursor:pointer" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='transparent'">
+            <div style="font-size:32px;margin-bottom:8px">${icon}</div>
+            <div style="font-size:14px;font-weight:600;margin-bottom:4px">${name}</div>
+            <div style="font-size:11px;color:var(--red)">${action}</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  else if(page==='delivery'){
+    el.innerHTML = `
+      <div class="page-title">🍽️ Room Delivery</div>
+      <p class="page-subtitle">Menu categories, dietary requests, live tracking, repeat order, order history, staff assignment, payment status, notifications</p>
+
+      <div class="delivery-banner" style="margin-bottom:32px">
+        <div class="delivery-banner-icon">⚡</div>
+        <div>
+          <h3>Express Room Service</h3>
+          <p>Available 24 hours a day, 7 days a week. Track your order in real-time.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200&h=130&fit=crop" style="border-radius:12px;width:140px;height:90px;object-fit:cover"/>
+      </div>
+
+      <div class="panel" style="margin-bottom:24px">
+        <div class="panel-header">
+          <div class="panel-title">Quick Actions</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="pill" onclick="repeatLastOrder()">🔁 Repeat previous order</button>
+            <button class="pill" onclick="toggleNotifications()">🔔 Push notifications: <span id="notifState">Off</span></button>
+            <button class="pill" onclick="showOrderHistory()">🧾 Order history</button>
+          </div>
+        </div>
+        <div class="booking-form-grid" style="grid-template-columns:1fr;gap:12px">
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Special dietary requests</label>
+            <input class="form-input" id="dietaryRequests" placeholder="e.g., Halal, vegan, no peanuts, gluten-free..."/>
+            <div class="small">These requests are saved on the order and shown to the assigned staff.</div>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Room number for delivery</label>
+            <input class="form-input" id="deliveryRoomNo" placeholder="e.g., 204" value="204"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="trackingPanel" style="display:none;margin-bottom:24px;border:2px solid var(--pink-hot)">
+        <div class="panel-header">
+          <div class="panel-title">Live Order Tracking</div>
+          <div class="small" id="trackingMeta">—</div>
+        </div>
+        <div class="progress" style="margin-bottom:10px"><div id="trackBar"></div></div>
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div class="small"><b>Status:</b> <span id="trackStatus">—</span></div>
+          <div class="small"><b>ETA:</b> <span id="trackEta">—</span></div>
+          <div class="small"><b>Assigned staff:</b> <span id="trackStaff">—</span></div>
+          <div class="small"><b>Payment:</b> <span id="trackPay">Pending</span> <button class="link-btn" type="button" onclick="togglePaymentStatus()">Mark paid</button></div>
+        </div>
+      </div>
+
+      ${[
+        ['🍳 Breakfast & Brunch', [
+          ['https://images.unsplash.com/photo-1533089860892-a7c6f10a081a?w=300&h=200&fit=crop','Full English Breakfast','$18'],
+          ['https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=300&h=200&fit=crop','Pancake Stack','$12'],
+          ['https://images.unsplash.com/photo-1525351484163-7529414344d8?w=300&h=200&fit=crop','Avocado Toast','$14'],
+          ['https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300&h=200&fit=crop','Smoked Salmon Bagel','$16'],
+        ]],
+        ['🥗 Mains & Salads', [
+          ['https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=300&h=200&fit=crop','Grilled Steak','$38'],
+          ['https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=200&fit=crop','Garden Salad','$15'],
+          ['https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300&h=200&fit=crop','Margherita Pizza','$22'],
+          ['https://images.unsplash.com/photo-1547592180-85f173990554?w=300&h=200&fit=crop','Seafood Pasta','$28'],
+        ]],
+        ['🍰 Desserts & Drinks', [
+          ['https://images.unsplash.com/photo-1551024601-bec78aea704b?w=300&h=200&fit=crop','Chocolate Cake','$10'],
+          ['https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=300&h=200&fit=crop','Specialty Coffee','$6'],
+          ['https://images.unsplash.com/photo-1544145945-f90425340c7e?w=300&h=200&fit=crop','Cocktails','$16'],
+          ['https://images.unsplash.com/photo-1488474955307-8e61d1d1fd84?w=300&h=200&fit=crop','Fresh Juice','$8'],
+        ]],
+      ].map(([cat, items]) => `
+        <div class="panel" style="margin-bottom:24px">
+          <div class="panel-header">
+            <div class="panel-title">${cat}</div>
+          </div>
+          <div class="delivery-grid">
+            ${items.map(([img,name,price])=>`
+              <div class="delivery-card">
+                <img class="delivery-card-img" src="${img}" alt="${name}" onerror="this.style.background='#eee'"/>
+                <div class="delivery-card-body">
+                  <div class="delivery-card-name">${name}</div>
+                  <div class="delivery-card-price">${price}</div>
+                  <button class="btn-pink" style="width:100%;margin-top:8px;padding:8px;font-size:12px" onclick="addToCart('${name}','${price}')">Add to Order</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('')}
+
+      <div class="panel" style="position:sticky;bottom:20px;border:2px solid var(--pink-hot)">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+          <div>
+            <div style="font-size:14px;font-weight:600" id="cartSummary">Cart: 0 items</div>
+            <div style="font-size:12px;color:var(--silver-dark)" id="cartSub">Delivery to Room 204 · ~15-20 min</div>
+          </div>
+          <button class="btn-primary" style="width:auto;padding:14px 32px" onclick="placeOrder()">Place Order 🚀</button>
+        </div>
+      </div>
+    `;
+    window._cart = [];
+    window._cartTotal = 0;
+    window._activeOrderId = null;
+    syncNotifState();
+  }
+
+  else if(page==='rooms'){
+    el.innerHTML = `
+      <div class="page-title">🛏️ Book a Room</div>
+      <p class="page-subtitle">Choose your perfect stay — from cozy standard rooms to presidential suites</p>
+
+      <div class="panel" style="margin-bottom:28px">
+        <div class="panel-title" style="margin-bottom:18px;font-family:'Cormorant Garamond',serif;font-size:22px">Search Availability</div>
+        <div class="booking-form-grid">
+          <div class="form-group">
+            <label class="form-label">Check-in Date</label>
+            <input class="form-input" type="date"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Check-out Date</label>
+            <input class="form-input" type="date"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Guests</label>
+            <select class="form-input">
+              <option>1 Guest</option><option>2 Guests</option><option>3 Guests</option><option>4 Guests</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Room Type</label>
+            <select class="form-input">
+              <option>All Types</option><option>Standard</option><option>Deluxe</option><option>Suite</option><option>Presidential</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-primary" style="max-width:200px">Search Rooms →</button>
+      </div>
+
+      <div class="room-grid">
+        ${[
+          ['https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&q=80','Deluxe Suite','$280/night','101','🛁 Bathtub','📶 WiFi','🍳 Breakfast','🌅 City View'],
+          ['https://images.unsplash.com/photo-1590490360182-c33d57733427?w=500&q=80','Presidential Suite','$650/night','001','🛁 Jacuzzi','📶 WiFi','🍳 Breakfast','🥂 Butler'],
+          ['https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=500&q=80','Standard Room','$150/night','312','🚿 Shower','📶 WiFi','☕ Coffee','📺 Smart TV'],
+          ['https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&q=80','Garden View Suite','$190/night','205','🛁 Bathtub','📶 WiFi','🌿 Garden View','🍳 Breakfast'],
+          ['https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=500&q=80','Family Room','$320/night','410','🛏️ 2 Beds','📶 WiFi','🍳 Breakfast','🎮 Game Console'],
+          ['https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=500&q=80','Honeymoon Suite','$480/night','PH1','🛁 Jacuzzi','🌹 Rose Décor','🥂 Champagne','🌆 Panoramic View'],
+        ].map(([img,name,price,room,...amenities])=>`
+          <div class="room-card">
+            <img class="room-img" src="${img}" alt="${name}" onerror="this.style.background='#f0f0f0';this.style.height='180px'"/>
+            <div class="room-body">
+              <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px">
+                <div class="room-name">${name}</div>
+                <div style="font-size:11px;color:var(--silver-dark)">Rm ${room}</div>
+              </div>
+              <div class="room-price">${price}</div>
+              <div class="room-amenities">
+                ${amenities.map(a=>`<span class="amenity-tag">${a}</span>`).join('')}
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="btn-outline" style="flex:1;padding:9px;font-size:12px">Details</button>
+                <button class="btn-pink" style="flex:1;padding:9px;font-size:12px">Book Now</button>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  else if(page==='bookings'){
+    el.innerHTML = `
+      <div class="page-title">📋 My Bookings</div>
+      <p class="page-subtitle">All your reservations in one place</p>
+      <div class="panel">
+        <table class="data-table">
+          <tr><th>Booking ID</th><th>Room</th><th>Check-in</th><th>Check-out</th><th>Status</th><th>Total</th><th>Action</th></tr>
+          <tr><td>#BK-0012</td><td>Deluxe Suite 204</td><td>May 6, 2026</td><td>May 9, 2026</td><td><span class="badge badge-green">Active</span></td><td>$840</td><td><button class="btn-pink" style="padding:6px 14px;font-size:11px">Details</button></td></tr>
+          <tr><td>#BK-0009</td><td>Standard Room 112</td><td>Apr 12, 2026</td><td>Apr 14, 2026</td><td><span class="badge badge-blue">Completed</span></td><td>$300</td><td><button class="btn-outline" style="padding:6px 14px;font-size:11px">Invoice</button></td></tr>
+          <tr><td>#BK-0007</td><td>Garden Suite 205</td><td>Mar 20, 2026</td><td>Mar 23, 2026</td><td><span class="badge badge-blue">Completed</span></td><td>$570</td><td><button class="btn-outline" style="padding:6px 14px;font-size:11px">Invoice</button></td></tr>
+        </table>
+      </div>
+    `;
+  }
+
+  else {
+    el.innerHTML = `<div class="page-title">${page.charAt(0).toUpperCase()+page.slice(1)}</div><p class="page-subtitle">This section is loading...</p>`;
+  }
+}
+
+const DELIVERY_KEY = 'sh.delivery.orders';
+function getDeliveryOrders(){ try { return JSON.parse(localStorage.getItem(DELIVERY_KEY) || '[]'); } catch { return []; } }
+function saveDeliveryOrders(orders){ localStorage.setItem(DELIVERY_KEY, JSON.stringify(orders)); }
+
+function updateCartSummary(lastAddedName){
+  window._cart = window._cart || [];
+  const count = window._cart.reduce((a,i)=>a+(i.qty||1),0);
+  const total = window._cart.reduce((a,i)=>a+(Number(i.price||0)*(i.qty||1)),0);
+  const summary = document.getElementById('cartSummary');
+  const sub = document.getElementById('cartSub');
+  const room = document.getElementById('deliveryRoomNo')?.value || '204';
+  if(summary) summary.textContent = `Cart: ${count} item(s) · Total ${total.toFixed(2)} — ${lastAddedName ? `added "${lastAddedName}"` : ''}`;
+  if(sub) sub.textContent = `Delivery to Room ${room} · ~15-20 min`;
+}
+
+window.addToCart = function(name, price){
+  window._cart = window._cart || [];
+  const p = String(price||'').replace('$','');
+  const existing = window._cart.find(i => i.name === name);
+  if(existing) existing.qty = (existing.qty||1)+1;
+  else window._cart.push({ name, price: Number(p) || 0, qty: 1 });
+  updateCartSummary(name);
+};
+
+window.placeOrder = function(){
+  window._cart = window._cart || [];
+  if(window._cart.length === 0) return alert('Your cart is empty.');
+
+  const roomNo = (document.getElementById('deliveryRoomNo')?.value || '204').trim() || '204';
+  const dietary = (document.getElementById('dietaryRequests')?.value || '').trim();
+  const items = window._cart.map(i => ({...i}));
+  const total = items.reduce((a,i)=>a+(Number(i.price||0)*(i.qty||1)),0);
+
+  const staffPool = ['Alice (F&B)','John (Runner)','Sarah (Kitchen)','Paul (Supervisor)'];
+  const assignedStaff = staffPool[Math.floor(Math.random()*staffPool.length)];
+
+  const order = {
+    id: 'ORD-' + Math.random().toString(16).slice(2,8).toUpperCase(),
+    createdAt: new Date().toISOString(),
+    roomNo,
+    dietary,
+    items,
+    total: Number(total.toFixed(2)),
+    etaMins: 20,
+    status: 'Placed',
+    progress: 0,
+    assignedStaff,
+    paymentStatus: 'Pending'
+  };
+  const orders = getDeliveryOrders();
+  orders.unshift(order);
+  saveDeliveryOrders(orders.slice(0, 50));
+
+  // Start tracking current order
+  window._activeOrderId = order.id;
+  startOrderTracking(order.id);
+
+  // Reset cart
+  window._cart = [];
+  updateCartSummary('');
+  alert(`🚀 Order placed! Order ${order.id} assigned to ${assignedStaff}.`);
+};
+
+function startOrderTracking(orderId){
+  const panel = document.getElementById('trackingPanel');
+  if(panel) panel.style.display = 'block';
+
+  const steps = [
+    { p: 10, status:'Placed' },
+    { p: 25, status:'Confirmed' },
+    { p: 45, status:'Preparing' },
+    { p: 70, status:'Out for delivery' },
+    { p: 100, status:'Delivered' },
+  ];
+
+  let tick = 0;
+  if(window._trackTimer) clearInterval(window._trackTimer);
+  window._trackTimer = setInterval(()=>{
+    const orders = getDeliveryOrders();
+    const o = orders.find(x => x.id === orderId);
+    if(!o){ clearInterval(window._trackTimer); return; }
+
+    const step = steps[Math.min(tick, steps.length-1)];
+    o.progress = step.p;
+    o.status = step.status;
+    o.etaMins = Math.max(0, 20 - Math.round((o.progress/100)*20));
+    saveDeliveryOrders(orders);
+    renderTracking(o);
+
+    if(o.progress >= 100){
+      clearInterval(window._trackTimer);
+      if(isNotificationsOn()) {
+        // Demo push notification via alert
+        setTimeout(()=>alert(`✅ Delivered! Order ${o.id} has arrived at Room ${o.roomNo}.`), 200);
+      }
+    }
+    tick++;
+  }, 1500);
+
+  const orders = getDeliveryOrders();
+  const o = orders.find(x => x.id === orderId);
+  if(o) renderTracking(o);
+}
+
+function renderTracking(o){
+  const bar = document.getElementById('trackBar');
+  const meta = document.getElementById('trackingMeta');
+  const st = document.getElementById('trackStatus');
+  const eta = document.getElementById('trackEta');
+  const staff = document.getElementById('trackStaff');
+  const pay = document.getElementById('trackPay');
+  if(bar) bar.style.width = `${o.progress || 0}%`;
+  if(meta) meta.textContent = `Order ${o.id} · Room ${o.roomNo} · ${new Date(o.createdAt).toLocaleTimeString()}`;
+  if(st) st.textContent = o.status;
+  if(eta) eta.textContent = o.status === 'Delivered' ? 'Arrived' : `~${o.etaMins} min`;
+  if(staff) staff.textContent = o.assignedStaff || '—';
+  if(pay) pay.textContent = o.paymentStatus || 'Pending';
+}
+
+function showOrderHistory(){
+  const orders = getDeliveryOrders();
+  if(orders.length === 0) return alert('No previous orders yet.');
+  const lines = orders.slice(0, 8).map(o => {
+    const when = new Date(o.createdAt).toLocaleString();
+    return `${o.id} · Room ${o.roomNo} · ${o.status} · $${o.total.toFixed(2)} · ${when}`;
+  }).join('\n');
+  alert('Order history:\n\n' + lines);
+}
+
+function repeatLastOrder(){
+  const last = getDeliveryOrders()[0];
+  if(!last) return alert('No previous order to repeat yet.');
+  window._cart = last.items.map(i => ({ name: i.name, price: Number(i.price||0), qty: Number(i.qty||1) }));
+  const roomEl = document.getElementById('deliveryRoomNo');
+  const dietEl = document.getElementById('dietaryRequests');
+  if(roomEl) roomEl.value = last.roomNo || (roomEl.value || '204');
+  if(dietEl) dietEl.value = last.dietary || '';
+  updateCartSummary('repeated previous order');
+  alert(`Repeated ${last.id}. Cart restored.`);
+}
+
+function togglePaymentStatus(){
+  const id = window._activeOrderId;
+  if(!id) return;
+  const orders = getDeliveryOrders();
+  const o = orders.find(x => x.id === id);
+  if(!o) return;
+  o.paymentStatus = o.paymentStatus === 'Paid' ? 'Pending' : 'Paid';
+  saveDeliveryOrders(orders);
+  renderTracking(o);
+}
+
+const NOTIF_KEY = 'sh.delivery.notif';
+function isNotificationsOn(){ return localStorage.getItem(NOTIF_KEY) === '1'; }
+function syncNotifState(){
+  const el = document.getElementById('notifState');
+  if(el) el.textContent = isNotificationsOn() ? 'On' : 'Off';
+}
+function toggleNotifications(){
+  localStorage.setItem(NOTIF_KEY, isNotificationsOn() ? '0' : '1');
+  syncNotifState();
+}
+
+// ============================================================
+// MANAGER PAGES
+// ============================================================
+function showManagerPage(page){
+  document.querySelectorAll('#managerDash .sidebar-item').forEach(i=>{
+    i.classList.remove('active');
+    if(i.getAttribute('onclick')&&i.getAttribute('onclick').includes(`'${page}'`)) i.classList.add('active');
+  });
+  const el = document.getElementById('managerMain');
+
+  if(page==='overview'){
+    el.innerHTML = `
+      <div class="page-title">Operations Dashboard</div>
+      <p class="page-subtitle">Today — May 6, 2026</p>
+
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-icon">🏨</div><div class="stat-value">87%</div><div class="stat-label">Occupancy Rate</div></div>
+        <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-value">142</div><div class="stat-label">Guests In-House</div></div>
+        <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value">12</div><div class="stat-label">Check-ins Today</div></div>
+        <div class="stat-card"><div class="stat-icon">🚪</div><div class="stat-value">8</div><div class="stat-label">Check-outs Today</div></div>
+        <div class="stat-card"><div class="stat-icon">⚠️</div><div class="stat-value">5</div><div class="stat-label">Pending Requests</div></div>
+        <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-value">$18.4k</div><div class="stat-label">Revenue Today</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex-wrap:wrap">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Recent Check-ins</div><button class="btn-pink" style="padding:8px 16px;font-size:12px">View All</button></div>
+          <table class="data-table">
+            <tr><th>Guest</th><th>Room</th><th>Nights</th><th>Status</th></tr>
+            <tr><td>Marie Umurungi</td><td>204</td><td>3</td><td><span class="badge badge-green">Checked In</span></td></tr>
+            <tr><td>Jean Hakizimana</td><td>312</td><td>1</td><td><span class="badge badge-green">Checked In</span></td></tr>
+            <tr><td>Alice Nkurunziza</td><td>PH1</td><td>5</td><td><span class="badge badge-yellow">Pending</span></td></tr>
+            <tr><td>Robert Mugisha</td><td>110</td><td>2</td><td><span class="badge badge-green">Checked In</span></td></tr>
+          </table>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Room Status</div></div>
+          <table class="data-table">
+            <tr><th>Room</th><th>Type</th><th>Status</th><th>Action</th></tr>
+            <tr><td>204</td><td>Deluxe</td><td><span class="badge badge-green">Occupied</span></td><td><button class="btn-pink" style="padding:4px 10px;font-size:11px">View</button></td></tr>
+            <tr><td>301</td><td>Standard</td><td><span class="badge badge-blue">Available</span></td><td><button class="btn-pink" style="padding:4px 10px;font-size:11px">Assign</button></td></tr>
+            <tr><td>105</td><td>Suite</td><td><span class="badge badge-yellow">Cleaning</span></td><td><button class="btn-pink" style="padding:4px 10px;font-size:11px">Track</button></td></tr>
+            <tr><td>PH1</td><td>Presidential</td><td><span class="badge badge-red">Maintenance</span></td><td><button class="btn-pink" style="padding:4px 10px;font-size:11px">Report</button></td></tr>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+  else if(page==='reservations'){
+    el.innerHTML = `
+      <div class="page-title">📅 Reservations</div>
+      <p class="page-subtitle">All current and upcoming bookings</p>
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">All Reservations</div>
+          <button class="btn-primary" style="width:auto;padding:10px 20px;font-size:13px">+ New Reservation</button>
+        </div>
+        <table class="data-table">
+          <tr><th>ID</th><th>Guest Name</th><th>Room</th><th>Check-in</th><th>Check-out</th><th>Guests</th><th>Status</th><th>Amount</th></tr>
+          ${[
+            ['#001','Marie U.','204 Deluxe','May 6','May 9','1','Active','$840'],
+            ['#002','Jean H.','312 Std','May 6','May 7','2','Active','$150'],
+            ['#003','Alice N.','PH1 Presidential','May 7','May 12','2','Upcoming','$3,250'],
+            ['#004','Robert M.','110 Garden','May 6','May 8','3','Active','$380'],
+            ['#005','Claire K.','205 Suite','May 8','May 10','1','Upcoming','$560'],
+          ].map(r=>`<tr>${r.map((c,i)=>i===6?`<td><span class="badge ${c==='Active'?'badge-green':'badge-yellow'}">${c}</span></td>`:`<td>${c}</td>`).join('')}</tr>`).join('')}
+        </table>
+      </div>
+    `;
+  }
+
+  else {
+    el.innerHTML = `<div class="page-title">${page.charAt(0).toUpperCase()+page.slice(1)}</div><p class="page-subtitle">Section loading...</p>`;
+  }
+}
+
+// ============================================================
+// BOSS PAGES
+// ============================================================
+function showBossPage(page){
+  document.querySelectorAll('#bossDash .sidebar-item').forEach(i=>{
+    i.classList.remove('active');
+    if(i.getAttribute('onclick')&&i.getAttribute('onclick').includes(`'${page}'`)) i.classList.add('active');
+  });
+  const el = document.getElementById('bossMain');
+
+  if(page==='overview'){
+    el.innerHTML = `
+      <div class="page-title">Executive Analytics 👑</div>
+      <p class="page-subtitle">Silver Hotel — May 2026 Overview</p>
+
+      <div class="stat-row">
+        <div class="stat-card" style="border-top-color:#B8860B"><div class="stat-icon">💰</div><div class="stat-value">$284k</div><div class="stat-label">Revenue This Month</div></div>
+        <div class="stat-card" style="border-top-color:#B8860B"><div class="stat-icon">📈</div><div class="stat-value">+23%</div><div class="stat-label">Growth vs Last Month</div></div>
+        <div class="stat-card" style="border-top-color:#B8860B"><div class="stat-icon">🏨</div><div class="stat-value">89%</div><div class="stat-label">Avg Occupancy</div></div>
+        <div class="stat-card" style="border-top-color:#B8860B"><div class="stat-icon">⭐</div><div class="stat-value">4.8</div><div class="stat-label">Guest Satisfaction</div></div>
+        <div class="stat-card" style="border-top-color:#B8860B"><div class="stat-icon">👥</div><div class="stat-value">68</div><div class="stat-label">Total Staff</div></div>
+        <div class="stat-card" style="border-top-color:#B8860B"><div class="stat-icon">🔁</div><div class="stat-value">62%</div><div class="stat-label">Repeat Guests</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Revenue by Department</div></div>
+          ${[
+            ['Rooms','$190,000','67%'],['Restaurant','$52,000','18%'],
+            ['Spa','$24,000','8%'],['Events','$18,000','7%'],
+          ].map(([dept,amt,pct])=>`
+            <div style="margin-bottom:16px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+                <span style="font-size:13px;font-weight:500">${dept}</span>
+                <span style="font-size:13px;color:var(--red)">${amt}</span>
+              </div>
+              <div style="height:8px;background:var(--silver-light);border-radius:4px">
+                <div style="height:100%;width:${pct};background:linear-gradient(90deg,var(--red),var(--red-light));border-radius:4px"></div>
+              </div>
+              <div style="font-size:11px;color:var(--silver-dark);margin-top:2px">${pct} of total</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Department Managers</div></div>
+          <table class="data-table">
+            <tr><th>Manager</th><th>Department</th><th>Performance</th></tr>
+            <tr><td>Alice Uwase</td><td>Front Desk</td><td><span class="badge badge-green">Excellent</span></td></tr>
+            <tr><td>John Nkusi</td><td>Housekeeping</td><td><span class="badge badge-green">Good</span></td></tr>
+            <tr><td>Sarah Kamanzi</td><td>F&B</td><td><span class="badge badge-yellow">Average</span></td></tr>
+            <tr><td>Paul Habimana</td><td>Maintenance</td><td><span class="badge badge-green">Good</span></td></tr>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+  else if(page==='revenue'){
+    el.innerHTML = `
+      <div class="page-title">💰 Revenue & Financials</div>
+      <p class="page-subtitle">Detailed financial breakdown — May 2026</p>
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-icon">💵</div><div class="stat-value">$284k</div><div class="stat-label">Total Revenue</div></div>
+        <div class="stat-card"><div class="stat-icon">💸</div><div class="stat-value">$118k</div><div class="stat-label">Total Expenses</div></div>
+        <div class="stat-card"><div class="stat-icon">📊</div><div class="stat-value">$166k</div><div class="stat-label">Net Profit</div></div>
+        <div class="stat-card"><div class="stat-icon">🎯</div><div class="stat-value">58%</div><div class="stat-label">Profit Margin</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title" style="font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:20px">Monthly Revenue Trend</div>
+        <div style="display:flex;align-items:flex-end;gap:12px;height:180px;padding:10px 0">
+          ${[['Jan','$210k',74],['Feb','$198k',70],['Mar','$225k',79],['Apr','$260k',92],['May','$284k',100]].map(([m,v,h])=>`
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px">
+              <div style="font-size:11px;color:var(--red);font-weight:600">${v}</div>
+              <div style="width:100%;height:${h}%;background:linear-gradient(180deg,var(--red-light),var(--red-dark));border-radius:8px 8px 0 0;transition:0.3s"></div>
+              <div style="font-size:11px;color:var(--silver-dark)">${m}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  else {
+    el.innerHTML = `<div class="page-title">${page.charAt(0).toUpperCase()+page.slice(1)}</div><p class="page-subtitle">Loading...</p>`;
+  }
+}
+
+// ============================================================
+// EMPLOYEE PAGES
+// ============================================================
+function showEmployeePage(page){
+  document.querySelectorAll('#employeeDash .sidebar-item').forEach(i=>{
+    i.classList.remove('active');
+    if(i.getAttribute('onclick')&&i.getAttribute('onclick').includes(`'${page}'`)) i.classList.add('active');
+  });
+  const el = document.getElementById('employeeMain');
+
+  if(page==='overview'){
+    el.innerHTML = `
+      <div class="page-title">Good Morning! 👋</div>
+      <p class="page-subtitle">Staff Dashboard — May 6, 2026</p>
+
+      <div class="stat-row">
+        <div class="stat-card" style="border-top-color:#1565c0"><div class="stat-icon">✅</div><div class="stat-value">4</div><div class="stat-label">Tasks Today</div></div>
+        <div class="stat-card" style="border-top-color:#1565c0"><div class="stat-icon">🕐</div><div class="stat-value">8:02 AM</div><div class="stat-label">Clock-in Time</div></div>
+        <div class="stat-card" style="border-top-color:#1565c0"><div class="stat-icon">📅</div><div class="stat-value">22</div><div class="stat-label">Days This Month</div></div>
+        <div class="stat-card" style="border-top-color:#1565c0"><div class="stat-icon">🌴</div><div class="stat-value">5</div><div class="stat-label">Leave Days Left</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Today's Tasks</div><button class="btn-pink" style="padding:8px 14px;font-size:12px">View All</button></div>
+          ${[
+            ['Clean Room 204','Housekeeping','Pending'],
+            ['Prepare Banquet Hall A','Events','In Progress'],
+            ['Restock minibar - Floor 3','F&B','Pending'],
+            ['Room 301 turnover','Housekeeping','Completed'],
+          ].map(([task,dept,status])=>`
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--silver-light)">
+              <input type="checkbox" style="accent-color:var(--red);width:16px;height:16px" ${status==='Completed'?'checked':''}/>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:500;${status==='Completed'?'text-decoration:line-through;color:var(--silver-dark)':''}">${task}</div>
+                <div style="font-size:11px;color:var(--silver-dark)">${dept}</div>
+              </div>
+              <span class="badge ${status==='Completed'?'badge-green':status==='In Progress'?'badge-yellow':'badge-blue'}">${status}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">This Week's Schedule</div></div>
+          <table class="data-table">
+            <tr><th>Day</th><th>Shift</th><th>Hours</th></tr>
+            <tr><td>Mon</td><td>Morning</td><td>7am – 3pm</td></tr>
+            <tr><td>Tue</td><td>Morning</td><td>7am – 3pm</td></tr>
+            <tr><td>Wed</td><td>Morning</td><td>7am – 3pm</td></tr>
+            <tr><td>Thu</td><td>Off</td><td>—</td></tr>
+            <tr><td>Fri</td><td>Evening</td><td>3pm – 11pm</td></tr>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+  else if(page==='payroll'){
+    el.innerHTML = `
+      <div class="page-title">💵 My Payroll</div>
+      <p class="page-subtitle">Salary and payment history</p>
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-icon">💵</div><div class="stat-value">$1,200</div><div class="stat-label">Monthly Salary</div></div>
+        <div class="stat-card"><div class="stat-icon">⏰</div><div class="stat-value">168h</div><div class="stat-label">Hours This Month</div></div>
+        <div class="stat-card"><div class="stat-icon">🎁</div><div class="stat-value">$80</div><div class="stat-label">Bonus Earned</div></div>
+        <div class="stat-card"><div class="stat-icon">📅</div><div class="stat-value">May 30</div><div class="stat-label">Next Payment</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-header"><div class="panel-title">Payment History</div></div>
+        <table class="data-table">
+          <tr><th>Month</th><th>Base</th><th>Bonus</th><th>Deductions</th><th>Net Pay</th><th>Status</th></tr>
+          <tr><td>April 2026</td><td>$1,200</td><td>$60</td><td>$120</td><td>$1,140</td><td><span class="badge badge-green">Paid</span></td></tr>
+          <tr><td>March 2026</td><td>$1,200</td><td>$80</td><td>$120</td><td>$1,160</td><td><span class="badge badge-green">Paid</span></td></tr>
+          <tr><td>February 2026</td><td>$1,200</td><td>$0</td><td>$120</td><td>$1,080</td><td><span class="badge badge-green">Paid</span></td></tr>
+          <tr><td>May 2026</td><td>$1,200</td><td>$80</td><td>$120</td><td>$1,160</td><td><span class="badge badge-yellow">Pending</span></td></tr>
+        </table>
+      </div>
+    `;
+  }
+
+  else {
+    el.innerHTML = `<div class="page-title">${page.charAt(0).toUpperCase()+page.slice(1)}</div><p class="page-subtitle">Loading...</p>`;
+  }
+}
+
+// Initialize
+showClientPage('overview');
+</script>
+</body>
+</html>
